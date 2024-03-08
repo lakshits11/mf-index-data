@@ -1,0 +1,17 @@
+curl 'https://www.niftyindices.com/Backpage.aspx/gethistoricaltypeindexdata' \
+--compressed \
+-X POST \
+-H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:123.0) Gecko/20100101 Firefox/123.0' \
+-H 'Accept: */*' \
+-H 'Accept-Language: en-US,en;q=0.5' \
+-H 'Accept-Encoding: gzip, deflate, br' \
+-H 'Content-Type: application/json;charset=UTF-8' \
+-H 'X-Requested-With: XMLHttpRequest' \
+-H 'Origin: https://www.niftyindices.com' \
+-H 'Connection: keep-alive' \
+-H 'Referer: https://www.niftyindices.com/reports/historical-data' \
+-H 'Cookie: ASP.NET_SessionId=dbytdbokotunxqrrhxwsuk23; ak_bmsc=A6283F794B93AE5EA818531F9A54A130~000000000000000000000000000000~YAAQxI9lX4rhrfCNAQAAb1NHHxeN15lIM//ovDGaJ5tLhxIpYYI73bSCXyG9R5/2487cgfAHs4IoKgaVlh6UWS7hotAhx7rZogwNAsYuj9vEXt7U3lZPqQ4rpc89NXS3KeMRC39TMScD/nxw+9ECMKAmh1uNOxsyaBXQPJPZPbkxmeuYL5ZN/pJWfmRUmYD4C33OnIFWbQKaUDbChsmTvJtf6mtKn15rrFNERwMAbOeIKsSrLbhPmhHkLj98c3hpN9hTKw+Igug6TBBuDPr86yuF2+V68R3pVNDuFoATRhvv7hZnFyW4q62rUo52r+BPZd+65BLrX+cc88dttEsaUqbXAdmvWq7M23ewjC2maDXkyHs5L3OGRcAt1jrjClaszJ+TlvEX' \
+-H 'Sec-Fetch-Dest: empty' \
+-H 'Sec-Fetch-Mode: cors' \
+-H 'Sec-Fetch-Site: same-origin' \
+--data-raw '{"cinfo":{"indextype":"Equity","indexgroup":" Total returns Index Values "}}'

@@ -1,0 +1,13 @@
+curl --location --globoff 'https://iislliveblob.niftyindices.com/assets/json/IndexMapping.json?{}=null&_=1709921748577' \
+--header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:123.0) Gecko/20100101 Firefox/123.0' \
+--header 'Accept: application/json, text/javascript, */*; q=0.01' \
+--header 'Accept-Language: en-US,en;q=0.5' \
+--header 'Accept-Encoding: gzip, deflate, br' \
+--header 'Origin: https://www.niftyindices.com' \
+--header 'Connection: keep-alive' \
+--header 'Referer: https://www.niftyindices.com/' \
+--header 'Sec-Fetch-Dest: empty' \
+--header 'Sec-Fetch-Mode: cors' \
+--header 'Sec-Fetch-Site: same-site' \
+--header 'TE: trailers' \
+--header 'Cookie: bm_sv=CA87A949AA1FEF255B95E9BF8D905C31~YAAQxI9lXxGCrvCNAQAAnlFWHxfAxvdAaAHkKuUdxWt0TjmaUXKgV5PhDa1yTR514j84CknUglTdKwI06GhNST8vyrsPWPTK1XNoJy6j0H4BClgCErVmo8/l3Ciy7fHPg5LthCCH0DUQrvToGdj0sT/I62eW5lQH1tfclk5uOhGqF9L7nbHAYJxI1IMDbIOzNjSZKhrLK6toQ0P5vtE3ozg9R1DEM3SugsO3mn1moogkFB9QHvCDuDAr0i67QVmG38Knf0zz~1'
