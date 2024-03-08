@@ -39,6 +39,6 @@ for i, index in enumerate(index_list):
     trading_index_name = index_dict.get(index_name, index_name)
     command = curl_command\
         .replace('<INDEX_NAME>', trading_index_name)\
-        .replace('<INDEX_NAME_FILE>', index_name)
+        .replace('<INDEX_NAME_FILE>', index_name.replace('/', ':'))
     subprocess.run(command, shell=True, check=True)
     print()
