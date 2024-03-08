@@ -33,8 +33,8 @@ curl --compressed --location 'https://www.niftyindices.com/Backpage.aspx/getTota
 --output "./index data/<INDEX_NAME_FILE>.json"
 """
 
-for index in index_list:
-    print("fetching data for", index['indextype'])
+for i, index in enumerate(index_list):
+    print("fetching data for index: ", i, " of ", len(index_list), " - ", index['indextype'])
     index_name = index['indextype']
     trading_index_name = index_dict.get(index_name, index_name)
     command = curl_command\
