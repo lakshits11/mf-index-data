@@ -5,8 +5,8 @@ def read_json_file(filename):
     with open(filename, 'r') as file:
         return json.load(file)
 
-index_list = read_json_file('index list.json')["d"]
-index_mapping = read_json_file('index mapping.json')
+index_list = read_json_file('../index list.json')["d"]
+index_mapping = read_json_file('../index mapping.json')
 
 index_dict = {item['Index_long_name'].upper(): item['Trading_Index_Name'] for item in index_mapping}
 
@@ -30,7 +30,7 @@ curl --compressed --location 'https://www.niftyindices.com/Backpage.aspx/getTota
     "startDate": "01-Jan-1995",
     "endDate": "08-Mar-2024"
 }' \
---output "./index data/<INDEX_NAME_FILE>.json"
+--output "../index data/<INDEX_NAME_FILE>.json"
 """
 
 for i, index in enumerate(index_list):
