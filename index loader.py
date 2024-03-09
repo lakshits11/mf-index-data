@@ -8,7 +8,7 @@ def read_json_file(filename):
 index_list = read_json_file('index list.json')["d"]
 index_mapping = read_json_file('index mapping.json')
 
-index_dict = {item['Index_long_name']: item['Trading_Index_Name'] for item in index_mapping}
+index_dict = {item['Index_long_name'].upper(): item['Trading_Index_Name'] for item in index_mapping}
 
 curl_command = """
 curl --compressed --location 'https://www.niftyindices.com/Backpage.aspx/getTotalReturnIndexString' \
@@ -21,7 +21,7 @@ curl --compressed --location 'https://www.niftyindices.com/Backpage.aspx/getTota
 --header 'Origin: https://www.niftyindices.com' \
 --header 'Connection: keep-alive' \
 --header 'Referer: https://www.niftyindices.com/reports/historical-data' \
---header 'Cookie: ASP.NET_SessionId=dbytdbokotunxqrrhxwsuk23; ak_bmsc=A6283F794B93AE5EA818531F9A54A130~000000000000000000000000000000~YAAQxI9lX4rhrfCNAQAAb1NHHxeN15lIM//ovDGaJ5tLhxIpYYI73bSCXyG9R5/2487cgfAHs4IoKgaVlh6UWS7hotAhx7rZogwNAsYuj9vEXt7U3lZPqQ4rpc89NXS3KeMRC39TMScD/nxw+9ECMKAmh1uNOxsyaBXQPJPZPbkxmeuYL5ZN/pJWfmRUmYD4C33OnIFWbQKaUDbChsmTvJtf6mtKn15rrFNERwMAbOeIKsSrLbhPmhHkLj98c3hpN9hTKw+Igug6TBBuDPr86yuF2+V68R3pVNDuFoATRhvv7hZnFyW4q62rUo52r+BPZd+65BLrX+cc88dttEsaUqbXAdmvWq7M23ewjC2maDXkyHs5L3OGRcAt1jrjClaszJ+TlvEX; bm_sv=560DE094CEA76FC7963F8DB12ED2D74E~YAAQxI9lX7HqrfCNAQAAA6JHHxe/c3wiA5NsNVuCm+q0ytIXVwTPJsxMq3C4LHuiSzPf3yJsJhiB4R9cqY8JMhaXKiDq2NiuHtsEDolREGO0q+iP3zXH/p+gAisjTgxm9dw9pZeJnarV0WLZKosLih/R1Z/zvTsrtvoE8BBIPDm6uo/xFr23Lw2G0y5TPi87LSk8dRdNKUu9/hhUICeDMU6Mur9CNy0uM5267FHvCNmZj+rqzWK7CvoUn9/4hkDqZbJSXHvr~1; bm_sv=CA87A949AA1FEF255B95E9BF8D905C31~YAAQxI9lXxGCrvCNAQAAnlFWHxfAxvdAaAHkKuUdxWt0TjmaUXKgV5PhDa1yTR514j84CknUglTdKwI06GhNST8vyrsPWPTK1XNoJy6j0H4BClgCErVmo8/l3Ciy7fHPg5LthCCH0DUQrvToGdj0sT/I62eW5lQH1tfclk5uOhGqF9L7nbHAYJxI1IMDbIOzNjSZKhrLK6toQ0P5vtE3ozg9R1DEM3SugsO3mn1moogkFB9QHvCDuDAr0i67QVmG38Knf0zz~1' \
+--header 'Cookie: ASP.NET_SessionId=dbytdbokotunxqrrhxwsuk23; ak_bmsc=75E6D167E511AD04B5F24873A32F00A8~000000000000000000000000000000~YAAQxI9lX8zKyfCNAQAAWTmYIhdjagQdt/7Psj300/HNVfqfDguk69z8gFH2+xRvapJnCK9N9cIBVGvbdVcuIFet+ME2n2mSExpZQxuv8aBtq0eZFbibd6skzkMfzKNwMLnRBEXxyZ4Uq5C7/YTERjm4SzvRq08l8wQ7jRn+bxKXFzbCLxz4Iq0y4Uq3CMEjcfED/CgWv+zGANS3QCdqNMxsowiD96L7kMNCPXcuIcRCO/OtFpUrLNRnsGIbh6MU1sH9jtwsZCcieyBakk9Qfas4hPZkYGFotTi20AdkUzwwMwob+8DCgkWr4JWPIZvtruxqw43YrFxoBc+IpkJNna8dzZ7eiR4zwA0hlvp3YLt5baCeo5kUTrJ49kFaPs7xU52ZwNMs; bm_sv=06F24F30ADE214DA2D834A0920328BBB~YAAQxI9lXwnLyfCNAQAAKtSYIhcZZzxINjTuJOndoW14jkrpA/An2LNNpmjybCtr7ZTlt9S8NvFjooq/h/E4P9jQvAHMX4FZR8bepJOKY5Hw1FIU9QQblntQFmnjsAT7VE0cB4lp5Cqhph11vQ8rPk/QB6Mor/gkvlvtMsccSKvXIMpuyDMMIsPE/Flc7oaHtlEfKDQhWmDU5/30tQt3xj02pGNfEhRXtNUWwemO3Ufk9wt42HfDFMUix6/uvZxcLeDj6Y18~1; bm_mi=773C461F1C36057972371F13120031E4~YAAQxI9lX9vKyfCNAQAAMVKYIhc/6Enabe6OcShwsYHKWowZnGSc6O8qKvNPi/SO0sAMjj/yZ3B7JFikreVEMciTrWglB80UZjMi9/qN6vLYe2sz9y6r57SpTyz0Z0jawAD/nHSiJRk0/w8PzHI/ynmdwZEfTgk22HlQbpwHtN6yEz4fsVx25FDxdJB00x6qXxrB0D5KeV+gb6QKmAJkSDNqdvjo3S0IJSBX2QsUQ9FAFOq3mWRVHkIiu/LwEbDMchd8h3fmuXvZfv9IkXIQHA2XnMYEATDkTJzVQs2TCl802m0pUFA6brycDjjFR3kI2auPaVSzV18VvWd/0X3udDUPH3+gZECy/hwQ~1' \
 --header 'Sec-Fetch-Dest: empty' \
 --header 'Sec-Fetch-Mode: cors' \
 --header 'Sec-Fetch-Site: same-origin' \
