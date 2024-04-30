@@ -568,6 +568,19 @@
 			"dateofindex": null,
 			"formatdate": null,
 			"TitleName": null,
+			"indextype": "NIFTY MIDCAP150 QUALITY 50",
+			"indexgroup": null,
+			"Date": null
+		},
+		{
+			"__type": "IISL.ResearchPaper",
+			"category": null,
+			"title": null,
+			"documentname": null,
+			"downloadUrl": null,
+			"dateofindex": null,
+			"formatdate": null,
+			"TitleName": null,
 			"indextype": "NIFTY MIDSMALL FINANCIAL SERVICES",
 			"indexgroup": null,
 			"Date": null

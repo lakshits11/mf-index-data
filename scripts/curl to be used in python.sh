@@ -13,5 +13,6 @@ curl --compressed --location 'https://www.niftyindices.com/Backpage.aspx/getTota
 --header 'Sec-Fetch-Mode: cors' \
 --header 'Sec-Fetch-Site: same-origin' \
 --data '{
-    "cinfo": "{'\''name'\'':'\''NIFTY MIDCAP 150'\'','\''startDate'\'':'\''01-Jan-1995'\'','\''endDate'\'':'\''30-Apr-2024'\''}"
-}'
+    "cinfo": "{'\''name'\'':'\''<INDEX_NAME>'\'','\''startDate'\'':'\''01-Jan-1995'\'','\''endDate'\'':'\''30-Apr-2024'\''}"
+}' \
+--output "../index data/<INDEX_NAME_FILE>.json"
