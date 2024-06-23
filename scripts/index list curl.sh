@@ -1,17 +1,1 @@
-curl 'https://www.niftyindices.com/Backpage.aspx/gethistoricaltypeindexdata' \
---compressed \
--X POST \
--H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:123.0) Gecko/20100101 Firefox/123.0' \
--H 'Accept: */*' \
--H 'Accept-Language: en-US,en;q=0.5' \
--H 'Accept-Encoding: gzip, deflate, br' \
--H 'Content-Type: application/json;charset=UTF-8' \
--H 'X-Requested-With: XMLHttpRequest' \
--H 'Origin: https://www.niftyindices.com' \
--H 'Connection: keep-alive' \
--H 'Referer: https://www.niftyindices.com/reports/historical-data' \
--H 'Cookie: ASP.NET_SessionId=dbytdbokotunxqrrhxwsuk23; ak_bmsc=A6283F794B93AE5EA818531F9A54A130~000000000000000000000000000000~YAAQxI9lX4rhrfCNAQAAb1NHHxeN15lIM//ovDGaJ5tLhxIpYYI73bSCXyG9R5/2487cgfAHs4IoKgaVlh6UWS7hotAhx7rZogwNAsYuj9vEXt7U3lZPqQ4rpc89NXS3KeMRC39TMScD/nxw+9ECMKAmh1uNOxsyaBXQPJPZPbkxmeuYL5ZN/pJWfmRUmYD4C33OnIFWbQKaUDbChsmTvJtf6mtKn15rrFNERwMAbOeIKsSrLbhPmhHkLj98c3hpN9hTKw+Igug6TBBuDPr86yuF2+V68R3pVNDuFoATRhvv7hZnFyW4q62rUo52r+BPZd+65BLrX+cc88dttEsaUqbXAdmvWq7M23ewjC2maDXkyHs5L3OGRcAt1jrjClaszJ+TlvEX' \
--H 'Sec-Fetch-Dest: empty' \
--H 'Sec-Fetch-Mode: cors' \
--H 'Sec-Fetch-Site: same-origin' \
---data-raw '{"cinfo":{"indextype":"Equity","indexgroup":" Total returns Index Values "}}'
+curl -o 'index list.json' 'https://www.niftyindices.com/Backpage.aspx/gethistoricaltypeindexdata' --compressed -X POST -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:127.0) Gecko/20100101 Firefox/127.0' -H 'Accept: */*' -H 'Accept-Language: en-US,en;q=0.5' -H 'Accept-Encoding: gzip, deflate, br, zstd' -H 'Content-Type: application/json;charset=UTF-8' -H 'X-Requested-With: XMLHttpRequest' -H 'Origin: https://www.niftyindices.com' -H 'Connection: keep-alive' -H 'Referer: https://www.niftyindices.com/reports/historical-data' -H 'Cookie: ak_bmsc=1274DF1204B79544E99247FA5D1C6EBE~000000000000000000000000000000~YAAQZzLUF30kwfuPAQAAk8gdRhjtu/YvMv6+loR6ZJbHzOULbzL+XEYnmgk2XaefdNx5OdwBmx1MVLGLu5/VMcw6I9dFaUt9nnb+03XBd8NK4ckXD6MZobMkYNfRDmpro036ZJmmjkW0h9rbQkCNkcTwJqNbKpaz49cnb2PrUl+cyNv32UOmVbl1dBO9oh/xJNSjPZMSjV1DUVVU8nDOEs2gltEAEOvyPMOGZlMrbDIvRWh0oDEnwYICMR5/xZBNca4DITZHsVUGSEmy1VRXdIdu1bR2LSz13n+//bfLu63wQ/ZtiCEgtc6ZPuNsVUXsT3NV2jwVkdFKiSryT6ALHgMLKiBisDir8ekySeAbhGbEaW5nipEbmncau2W69gnfszFY; ASP.NET_SessionId=iagrmsea13dwmquxskdddnqf; bm_sv=B7EB749A591204599CB09A89CF15B33B~YAAQZzLUF2VOwfuPAQAAYM8jRhiSNNpNUkcUngoOyziLd11gmREBNhbzy2LmkVZh2iwnYouulUrRwfDqz+LSrI/14X4gN2/yhjKunMK5pQihBxz6qolZkxchLlUfUZDD8+Pz8lrkHxH4IMWgpYGLDc5n0BRChnWhX1yxvVcKuCW4kp0NI0+luKLQHmXL6dUtKO8GWOzQl0nNZTGfpG7AE9rWF4l/pS0DTXoK4MSa6a+3LcnwDdDE+D2Fnsqq9dVT4IEuDDIY~1; bm_mi=2A83DC882C32FE71DC6E11BA70C8E652~YAAQZzLUF6QlwfuPAQAAcfQdRhhEzgwajWejqW0JN4qHrWoadKW5InEfWI03e6aHl8XsQGwS8YAZT1+ln8hpSuMapREWnxbOfthjfEuqlEQUvbcBFkLAfa6+OIJSmyVPvVm0YdoFtVt8UDNcuU/p9IxnaiPHIPsRG8tLJGQGl3TJ4rf/UQk2ePUNiZUjWVxuNkWTWSXOb25/z5E/5aXiu/g5++171bUIpC1h7f8yik9RRLitbWf5C4/+hzOlcYdf+yLtvqvH83jIxz+bNZciOOpuAuyaxapt/yVeva7kLdr7FkjzTb5nDuTxMLYxkMcaLvRJKxO+ySMIYKqj1zsXSywPyJcwdkgHy+N/~1' -H 'Sec-Fetch-Dest: empty' -H 'Sec-Fetch-Mode: cors' -H 'Sec-Fetch-Site: same-origin' -H 'Priority: u=1' --data-raw '{"cinfo":{"indextype":"Equity","indexgroup":" Total returns Index Values "}}'

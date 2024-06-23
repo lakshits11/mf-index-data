@@ -1,4 +1,4 @@
-curl --location --globoff 'https://iislliveblob.niftyindices.com/assets/json/IndexMapping.json?{}=null&_=1709921748577' \
+curl -o 'index mapping.json' --location --globoff 'https://iislliveblob.niftyindices.com/assets/json/IndexMapping.json?{}=null&_=1709921748577' \
 --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:123.0) Gecko/20100101 Firefox/123.0' \
 --header 'Accept: application/json, text/javascript, */*; q=0.01' \
 --header 'Accept-Language: en-US,en;q=0.5' \

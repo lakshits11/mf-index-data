@@ -2,7 +2,7 @@ import json
 import subprocess
 
 def read_json_file(filename):
-    with open(filename, 'r') as file:
+    with open(filename, 'r', encoding='utf-8-sig') as file:
         return json.load(file)
 
 index_list = read_json_file('../index list.json')["d"]
