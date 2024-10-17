@@ -411,7 +411,7 @@
 		"Index_long_name": "Nifty Healthcare Index"
 	},
 	{
-		"Trading_Index_Name": "NIFTY MIDSML 400",
+		"Trading_Index_Name": "NIFTY MidSmallcap 400",
 		"Index_long_name": "NIFTY MidSmallcap 400"
 	},
 	{
@@ -827,6 +827,26 @@
 	{
 		"Trading_Index_Name": "Nifty India Tourism",
 		"Index_long_name": "Nifty India Tourism"
+	},
+	{
+		"Trading_Index_Name": "Nifty Top 10 Equal Weight",
+		"Index_long_name": "Nifty Top 10 Equal Weight"
+	},
+	{
+		"Trading_Index_Name": "Nifty IPO",
+		"Index_long_name": "Nifty IPO"
+	},
+	{
+		"Trading_Index_Name": "Nifty Rural",
+		"Index_long_name": "Nifty Rural"
+	},
+	{
+		"Trading_Index_Name": "Nifty500 Multicap Momentum Quality 50",
+		"Index_long_name": "Nifty500 Multicap Momentum Quality 50"
+	},
+	{
+		"Trading_Index_Name": "Nifty Capital Markets",
+		"Index_long_name": "Nifty Capital Markets"
 	}
 
 ]
