@@ -152,6 +152,19 @@
       "dateofindex": null,
       "formatdate": null,
       "TitleName": null,
+      "indextype": "NIFTY CAPITAL MARKETS",
+      "indexgroup": null,
+      "Date": null
+    },
+    {
+      "__type": "IISL.ResearchPaper",
+      "category": null,
+      "title": null,
+      "documentname": null,
+      "downloadUrl": null,
+      "dateofindex": null,
+      "formatdate": null,
+      "TitleName": null,
       "indextype": "NIFTY COMMODITIES",
       "indexgroup": null,
       "Date": null
@@ -465,6 +478,19 @@
       "formatdate": null,
       "TitleName": null,
       "indextype": "NIFTY INFRASTRUCTURE",
+      "indexgroup": null,
+      "Date": null
+    },
+    {
+      "__type": "IISL.ResearchPaper",
+      "category": null,
+      "title": null,
+      "documentname": null,
+      "downloadUrl": null,
+      "dateofindex": null,
+      "formatdate": null,
+      "TitleName": null,
+      "indextype": "NIFTY IPO",
       "indexgroup": null,
       "Date": null
     },
@@ -880,6 +906,19 @@
       "dateofindex": null,
       "formatdate": null,
       "TitleName": null,
+      "indextype": "NIFTY RURAL",
+      "indexgroup": null,
+      "Date": null
+    },
+    {
+      "__type": "IISL.ResearchPaper",
+      "category": null,
+      "title": null,
+      "documentname": null,
+      "downloadUrl": null,
+      "dateofindex": null,
+      "formatdate": null,
+      "TitleName": null,
       "indextype": "NIFTY SERVICES SECTOR",
       "indexgroup": null,
       "Date": null
@@ -972,6 +1011,32 @@
       "formatdate": null,
       "TitleName": null,
       "indextype": "NIFTY SME EMERGE",
+      "indexgroup": null,
+      "Date": null
+    },
+    {
+      "__type": "IISL.ResearchPaper",
+      "category": null,
+      "title": null,
+      "documentname": null,
+      "downloadUrl": null,
+      "dateofindex": null,
+      "formatdate": null,
+      "TitleName": null,
+      "indextype": "NIFTY TOP 10 EQUAL WEIGHT",
+      "indexgroup": null,
+      "Date": null
+    },
+    {
+      "__type": "IISL.ResearchPaper",
+      "category": null,
+      "title": null,
+      "documentname": null,
+      "downloadUrl": null,
+      "dateofindex": null,
+      "formatdate": null,
+      "TitleName": null,
+      "indextype": "NIFTY TOP 15 EQUAL WEIGHT",
       "indexgroup": null,
       "Date": null
     },
@@ -1284,6 +1349,19 @@
       "formatdate": null,
       "TitleName": null,
       "indextype": "NIFTY500 MULTICAP INFRASTRUCTURE 50:30:20",
+      "indexgroup": null,
+      "Date": null
+    },
+    {
+      "__type": "IISL.ResearchPaper",
+      "category": null,
+      "title": null,
+      "documentname": null,
+      "downloadUrl": null,
+      "dateofindex": null,
+      "formatdate": null,
+      "TitleName": null,
+      "indextype": "NIFTY500 MULTICAP MOMENTUM QUALITY 50",
       "indexgroup": null,
       "Date": null
     },
