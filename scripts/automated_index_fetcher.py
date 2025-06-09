@@ -158,11 +158,16 @@ class NiftyIndexFetcher:
                 json.dump(data, f, indent=2, ensure_ascii=False)
                 
             print(f"  ✓ Data saved to {filepath}")
-            return True
+            return {
+                'success': True,
+                'old_count': old_count,
+                'new_count': new_count,
+                'change': new_count - old_count
+            }
             
         except Exception as e:
             print(f"  ✗ Error saving data for {index_name}: {e}")
-            return False
+            return {'success': False}
 
     def load_index_list(self, filename="../index list.json"):
         """Load the list of indices to fetch"""
@@ -185,6 +190,70 @@ class NiftyIndexFetcher:
             print(f"Error loading index mapping: {e}")
             return {}
 
+
+
+    def display_change_summary(self, change_tracking, failed_indices, interrupted=False):
+        """Display summary grouped by exact change amounts"""
+        title = "📊 EXECUTION SUMMARY - BY EXACT CHANGES"
+        if interrupted:
+            title += " (⚠️ INTERRUPTED)"
+        print(f"\n{title}")
+        print("=" * 50)
+        
+        # Sort changes by amount (largest positive first, then zero, then negative)
+        sorted_changes = sorted(change_tracking.keys(), key=lambda x: (-x if x > 0 else (0 if x == 0 else 1000 + abs(x))))
+        
+        # Group by categories
+        new_files = {}
+        increases = {}
+        no_changes = {}
+        decreases = {}
+        
+        for change in sorted_changes:
+            indices = change_tracking[change]
+            if change > 0:
+                # Check if these might be new files (we could enhance this logic)
+                increases[change] = indices
+            elif change == 0:
+                no_changes[change] = indices
+            else:
+                decreases[change] = indices
+        
+        # Display increases
+        if increases:
+            print("\n📈 INCREASED DATA:")
+            for change in sorted(increases.keys(), reverse=True):
+                indices_str = ", ".join(increases[change])
+                print(f"\033[92m+{change}\033[0m -> ({indices_str})")
+        
+        # Display no changes
+        if no_changes:
+            print("\n🔵 NO CHANGES:")
+            for change in no_changes:
+                indices_str = ", ".join(no_changes[change])
+                print(f"\033[94m{change}\033[0m -> ({indices_str})")
+        
+        # Display decreases
+        if decreases:
+            print("\n📉 DECREASED DATA:")
+            for change in sorted(decreases.keys(), reverse=True):
+                indices_str = ", ".join(decreases[change])
+                print(f"\033[91m{change}\033[0m -> ({indices_str})")
+        
+        # Display failures
+        if failed_indices:
+            print("\n❌ FAILED:")
+            indices_str = ", ".join(failed_indices)
+            print(f"\033[91mFailed\033[0m -> ({indices_str})")
+        
+        # Total summary
+        total_successful = sum(len(indices) for indices in change_tracking.values())
+        total_failed = len(failed_indices)
+        print(f"\n📊 Total: {total_successful} successful, {total_failed} failed")
+        
+        if interrupted:
+            print("⚠️  Note: Execution was interrupted - this is a partial summary")
+
     def fetch_all_indices(self):
         """Fetch data for all indices in the list"""
         # Get fresh cookies first
@@ -203,36 +272,55 @@ class NiftyIndexFetcher:
         print(f"Found {len(index_list)} indices to fetch")
         print("-" * 50)
         
+        # Track results for summary
         successful = 0
         failed = 0
+        failed_indices = []
+        change_tracking = {}  # {change_amount: [list_of_index_names]}
         
-        for i, index in enumerate(index_list):
-            index_name = index.get('indextype', '')
-            if not index_name:
-                continue
+        try:
+            for i, index in enumerate(index_list):
+                index_name = index.get('indextype', '')
+                if not index_name:
+                    continue
+                    
+                print(f"[{i+1}/{len(index_list)}] Fetching: {index_name}")
                 
-            print(f"[{i+1}/{len(index_list)}] Fetching: {index_name}")
-            
-            # Get trading name from mapping if available
-            trading_name = index_mapping.get(index_name.upper(), index_name)
-            
-            # Fetch the data
-            data = self.fetch_index_data(trading_name)
-            
-            if data:
-                if self.save_index_data(index_name, data):
-                    successful += 1
+                # Get trading name from mapping if available
+                trading_name = index_mapping.get(index_name.upper(), index_name)
+                
+                # Fetch the data
+                data = self.fetch_index_data(trading_name)
+                
+                if data:
+                    save_result = self.save_index_data(index_name, data)
+                    if save_result['success']:
+                        successful += 1
+                        # Track the change for summary
+                        change_amount = save_result['change']
+                        if change_amount not in change_tracking:
+                            change_tracking[change_amount] = []
+                        change_tracking[change_amount].append(index_name)
+                    else:
+                        failed += 1
+                        failed_indices.append(index_name)
                 else:
+                    print(f"  ✗ Failed to fetch data for {index_name}")
                     failed += 1
-            else:
-                print(f"  ✗ Failed to fetch data for {index_name}")
-                failed += 1
+                    failed_indices.append(index_name)
+                    
+                # Small delay between requests to be respectful
+                time.sleep(1)
                 
-            # Small delay between requests to be respectful
-            time.sleep(1)
+        except KeyboardInterrupt:
+            print(f"\n\n🛑 Interrupted by user (Ctrl+C)")
+            print(f"📊 Processed {successful + failed} out of {len(index_list)} indices before interruption")
             
         print("-" * 50)
-        print(f"Summary: {successful} successful, {failed} failed")
+        print(f"Basic Summary: {successful} successful, {failed} failed")
+        
+        # Display detailed summary grouped by changes
+        self.display_change_summary(change_tracking, failed_indices, interrupted=(successful + failed < len(index_list)))
 
 def main():
     """Main function"""
