@@ -101,7 +101,7 @@ class NiftyIndexFetcher:
         return None
 
     def save_index_data(self, index_name, data, output_dir="../index data"):
-        """Save index data to JSON file"""
+        """Save index data to JSON file with count comparison"""
         try:
             # Create output directory if it doesn't exist
             Path(output_dir).mkdir(parents=True, exist_ok=True)
@@ -110,6 +110,50 @@ class NiftyIndexFetcher:
             filename = index_name.replace('/', '-')
             filepath = f"{output_dir}/{filename}.json"
             
+            # Count new data items
+            new_count = 0
+            if data and 'd' in data:
+                if isinstance(data['d'], list):
+                    new_count = len(data['d'])
+                elif isinstance(data['d'], str) and data['d'] != '[]':
+                    # Try to parse if it's a JSON string
+                    try:
+                        parsed_d = json.loads(data['d'])
+                        if isinstance(parsed_d, list):
+                            new_count = len(parsed_d)
+                    except:
+                        new_count = 1 if data['d'] else 0
+            
+            # Check existing file and count
+            old_count = 0
+            if os.path.exists(filepath):
+                try:
+                    with open(filepath, 'r', encoding='utf-8') as f:
+                        existing_data = json.load(f)
+                        if existing_data and 'd' in existing_data:
+                            if isinstance(existing_data['d'], list):
+                                old_count = len(existing_data['d'])
+                            elif isinstance(existing_data['d'], str) and existing_data['d'] != '[]':
+                                try:
+                                    parsed_d = json.loads(existing_data['d'])
+                                    if isinstance(parsed_d, list):
+                                        old_count = len(parsed_d)
+                                except:
+                                    old_count = 1 if existing_data['d'] else 0
+                except:
+                    old_count = 0  # If file exists but can't be read
+            
+            # Print count comparison with colors
+            if old_count == new_count:
+                count_status = "\033[94m✓ same\033[0m"  # Blue
+            elif new_count > old_count:
+                count_status = f"\033[92m↑ +{new_count - old_count}\033[0m"  # Green
+            else:
+                count_status = f"\033[91m↓ -{old_count - new_count}\033[0m"  # Red
+            
+            print(f"  📊 Data count: {old_count} → {new_count} ({count_status})")
+            
+            # Save the new data
             with open(filepath, 'w', encoding='utf-8') as f:
                 json.dump(data, f, indent=2, ensure_ascii=False)
                 
