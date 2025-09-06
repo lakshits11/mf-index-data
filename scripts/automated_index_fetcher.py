@@ -12,6 +12,8 @@ from datetime import datetime
 import os
 from pathlib import Path
 
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
 class NiftyIndexFetcher:
     def __init__(self):
         self.session = requests.Session()
@@ -103,12 +105,13 @@ class NiftyIndexFetcher:
     def save_index_data(self, index_name, data, output_dir="../index data"):
         """Save index data to JSON file with count comparison"""
         try:
+            index_data_path = os.path.join(script_dir, output_dir)
             # Create output directory if it doesn't exist
-            Path(output_dir).mkdir(parents=True, exist_ok=True)
+            Path(index_data_path).mkdir(parents=True, exist_ok=True)
             
             # Clean filename (replace only problematic characters, keep spaces)
             filename = index_name.replace('/', '-')
-            filepath = f"{output_dir}/{filename}.json"
+            filepath = f"{index_data_path}/{filename}.json"
             
             # Count new data items
             new_count = 0
@@ -172,7 +175,8 @@ class NiftyIndexFetcher:
     def load_index_list(self, filename="../index list.json"):
         """Load the list of indices to fetch"""
         try:
-            with open(filename, 'r', encoding='utf-8-sig') as f:
+            index_list_path = os.path.join(script_dir, filename)
+            with open(index_list_path, 'r', encoding='utf-8-sig') as f:
                 data = json.load(f)
                 return data.get('d', [])
         except Exception as e:
@@ -182,14 +186,14 @@ class NiftyIndexFetcher:
     def load_index_mapping(self, filename="../index mapping.json"):
         """Load index name mapping"""
         try:
-            with open(filename, 'r', encoding='utf-8-sig') as f:
+            index_mapping_path = os.path.join(script_dir, filename)
+            with open(index_mapping_path, 'r', encoding='utf-8-sig') as f:
                 data = json.load(f)
                 return {item['Index_long_name'].upper(): item['Trading_Index_Name'] 
                        for item in data}
         except Exception as e:
             print(f"Error loading index mapping: {e}")
             return {}
-
 
 
     def display_change_summary(self, change_tracking, failed_indices, interrupted=False):
