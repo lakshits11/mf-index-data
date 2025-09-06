@@ -1,0 +1,92 @@
+name: Python CI and Scheduled Data Fetch
+
+on:
+  # Triggers for pull requests and pushes to main (for CI)
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+  # Runs the workflow every day at 03:15 UTC (which is 08:45 AM IST)
+  schedule:
+    - cron: '15 3 * * *'
+
+# Set permissions for the entire workflow
+permissions:
+  contents: write # This is required to push changes back to the repo
+  pull-requests: read
+
+jobs:
+  # This job runs on push and PR to ensure your code is healthy
+  test-and-lint:
+    name: Test and Lint
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+        cache: 'pip' # Caches dependencies to speed up future runs
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    # Add your linting and testing steps here if you have any
+    # - name: Lint with flake8
+    #   run: |
+    #     pip install flake8
+    #     flake8 .
+    # - name: Run tests
+    #   run: |
+    #     pip install pytest
+    #     pytest
+
+
+  # This job runs only on a schedule or manual trigger
+  fetch-index-data:
+    name: Fetch Latest Index Data
+    runs-on: ubuntu-latest
+    # This condition ensures the job only runs for schedule and workflow_dispatch events
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: Run the automated fetcher script
+      run: python scripts/automated_index_fetcher.py
+
+    - name: Commit and push if there are changes
+      run: |
+        # Configure git for the action
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        
+        # Add all changes to staging
+        git add .
+        
+        # Check if there are any changes to commit
+        if git diff --staged --quiet; then
+          echo "No changes to commit. Exiting."
+        else
+          # Commit the changes
+          git commit -m "Automated update: Fetch latest index data"
+          
+          # Push the changes to the main branch
+          git push origin main
+        fi
